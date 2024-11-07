@@ -46,3 +46,6 @@ Creadas las aplicaciones, se procede a la creación del Grupo de Seguridad que d
 1.	Desde la página principal de Microsoft Entra, abrir Aplicaciones empresariales.
 2.	Abrir cada aplicación, Backend y Frontend, y luego desde la sección Administrar, ingresar en Usuarios y grupos.
 3.	Agregar los grupos creados previamente y asignarles el rol correspondiente para cada aplicación.
+
+## NOTA
+En la raíz del proyecto se deben clonar los proyectos workflows-core (Rama EntityFrameworkWithNVARCHAR2) y workflows-studio (Rama SecretModels) dado que se usan las librerías de estos proyectos actualizados.
