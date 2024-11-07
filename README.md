@@ -15,8 +15,8 @@ Referencia: https://github.com/elsa-workflows/elsa-core/discussions/4814#discuss
 2. Registro de aplicación para Frontend
 
 Conservar los siguientes datos:
--	Id de Aplicación (ClientId) para la aplicación de Backend (9d16738c-0521-448d-8662-de508edf1174) y de Frontend (66fdfc1b-7927-46b1-9ce3-8f9344468df9).
--	Id de directorio (TenantId): 0fe23837-0f8e-4823-ba42-a2bf76e42852
+-	Id de Aplicación (ClientId) para la aplicación de Backend y de Frontend
+-	Id de directorio (TenantId)
  
 Creadas las aplicaciones, se procede a la creación del Grupo de Seguridad que deberá asignarse para otorgar acceso a la aplicación.
  
