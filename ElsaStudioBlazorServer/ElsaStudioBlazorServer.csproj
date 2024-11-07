@@ -1,0 +1,56 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="wwwroot\**" />
+    <Content Remove="wwwroot\**" />
+    <EmbeddedResource Remove="wwwroot\**" />
+    <None Remove="wwwroot\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="appsettings.json.example" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Identity.Web" Version="3.3.1" />
+	  <PackageReference Include="Microsoft.Identity.Web.UI" Version="3.3.1" />
+	  <PackageReference Include="Microsoft.Identity.Web.DownstreamApi" Version="3.3.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="Pages\_Host.cshtml" />
+    <_ContentIncludedByDefault Remove="Pages\Index.razor" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="appsettings.json.example" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\workflows-core\src\modules\Elsa.Webhooks\Elsa.Webhooks.csproj" />
+    <ProjectReference Include="..\workflows-studio\src\bundles\Elsa.Studio\Elsa.Studio.csproj" />
+    <ProjectReference Include="..\workflows-studio\src\framework\Elsa.Studio.Core.BlazorServer\Elsa.Studio.Core.BlazorServer.csproj" />
+    <ProjectReference Include="..\workflows-studio\src\framework\Elsa.Studio.Core\Elsa.Studio.Core.csproj" />
+    <ProjectReference Include="..\workflows-studio\src\framework\Elsa.Studio.DomInterop\Elsa.Studio.DomInterop.csproj" />
+    <ProjectReference Include="..\workflows-studio\src\framework\Elsa.Studio.Shared\Elsa.Studio.Shared.csproj" />
+    <ProjectReference Include="..\workflows-studio\src\framework\Elsa.Studio.Shell\Elsa.Studio.Shell.csproj" />
+    <ProjectReference Include="..\workflows-studio\src\modules\Elsa.Studio.ActivityPortProviders\Elsa.Studio.ActivityPortProviders.csproj" />
+    <ProjectReference Include="..\workflows-studio\src\modules\Elsa.Studio.Agents\Elsa.Studio.Agents.csproj" />
+    <ProjectReference Include="..\workflows-studio\src\modules\Elsa.Studio.Counter\Elsa.Studio.Counter.csproj" />
+    <ProjectReference Include="..\workflows-studio\src\modules\Elsa.Studio.Dashboard\Elsa.Studio.Dashboard.csproj" />
+    <ProjectReference Include="..\workflows-studio\src\modules\Elsa.Studio.Environments\Elsa.Studio.Environments.csproj" />
+    <ProjectReference Include="..\workflows-studio\src\modules\Elsa.Studio.Secrets\Elsa.Studio.Secrets.csproj" />
+    <ProjectReference Include="..\workflows-studio\src\modules\Elsa.Studio.UIHints\Elsa.Studio.UIHints.csproj" />
+    <ProjectReference Include="..\workflows-studio\src\modules\Elsa.Studio.Webhooks\Elsa.Studio.Webhooks.csproj" />
+    <ProjectReference Include="..\workflows-studio\src\modules\Elsa.Studio.WorkflowContexts\Elsa.Studio.WorkflowContexts.csproj" />
+    <ProjectReference Include="..\workflows-studio\src\modules\Elsa.Studio.Workflows.Core\Elsa.Studio.Workflows.Core.csproj" />
+    <ProjectReference Include="..\workflows-studio\src\modules\Elsa.Studio.Workflows\Elsa.Studio.Workflows.csproj" />
+  </ItemGroup>
+
+</Project>

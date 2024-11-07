@@ -396,3 +396,8 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+*.db
+/ElsaStudioBlazorServer/appsettings.json
+/ElsaStudioBlazorServer/appsettings.Development.json
+/ElsaServer/appsettings.json
+/ElsaServer/appsettings.Development.json

@@ -1,0 +1,26 @@
+﻿@page "/ad-login"
+@using MudBlazor
+@using Elsa.Studio.Components
+@using Elsa.Studio.Layouts
+@inherits StudioComponentBase
+@layout BasicLayout
+
+<div class="d-flex justify-end flex-grow-1">
+    <MudIconButton Icon="@Icons.Material.Outlined.Book" Color="Color.Inherit" Link="https://v3.elsaworkflows.io/" Target="_blank" Title="Documentation" />
+    <MudIconButton Icon="@Icons.Custom.Brands.GitHub" Color="Color.Inherit" Link="https://github.com/elsa-workflows/elsa-core" Target="_blank" Title="Source code" />
+</div>
+
+<MudContainer MaxWidth="MaxWidth.Small">
+    <MudStack Spacing="10">
+        <MudPaper Elevation="1">
+            <MudGrid Spacing="0" Justify="Justify.Center">
+                <MudItem md="9" xs="7" Class="pa-4 mx-auto my-4">
+                    <MudStack Spacing="1">
+                        <MudText Typo="Typo.h5">Login</MudText>
+                        <MudButton OnClick="AdLoginAsync">AD Login</MudButton>
+                    </MudStack>
+                </MudItem>
+            </MudGrid>
+        </MudPaper>
+    </MudStack>
+</MudContainer>

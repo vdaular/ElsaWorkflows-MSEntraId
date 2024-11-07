@@ -1,0 +1,100 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+		<Nullable>enable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+	</PropertyGroup>
+
+	<ItemGroup>
+	  <None Remove="appsettings.json.example" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Content Include="appsettings.json.example" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Azure.Identity" Version="1.13.1" />
+		<PackageReference Include="Bogus" Version="35.6.1" />
+		<PackageReference Include="DistributedLock.Redis" Version="1.0.3" />
+		<PackageReference Include="DistributedLock.Oracle" Version="1.0.3" />
+		<PackageReference Include="FluentStorage.Azure.Blobs" Version="5.3.0" />
+		<PackageReference Include="Grpc.Net.Client" Version="2.66.0" />
+		<PackageReference Include="JetBrains.Annotations" Version="2024.3.0" />
+		<PackageReference Include="Microsoft.Identity.Web" Version="3.3.1" />
+		<PackageReference Include="Proto.Cluster.Kubernetes" Version="1.7.0" />
+		<PackageReference Include="Proto.Persistence.Sqlite" Version="1.7.0" />
+		<PackageReference Include="Proto.Persistence.SqlServer" Version="1.7.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\workflows-core\src\common\Elsa.Api.Common\Elsa.Api.Common.csproj" />
+	  <ProjectReference Include="..\workflows-core\src\common\Elsa.DropIns.Core\Elsa.DropIns.Core.csproj" />
+	  <ProjectReference Include="..\workflows-core\src\common\Elsa.DropIns\Elsa.DropIns.csproj" />
+	  <ProjectReference Include="..\workflows-core\src\common\Elsa.Features\Elsa.Features.csproj" />
+	  <ProjectReference Include="..\workflows-core\src\common\Elsa.Mediator\Elsa.Mediator.csproj" />
+	  <ProjectReference Include="..\workflows-core\src\modules\Elsa.Agents.Activities\Elsa.Agents.Activities.csproj" />
+	  <ProjectReference Include="..\workflows-core\src\modules\Elsa.Agents.Api\Elsa.Agents.Api.csproj" />
+	  <ProjectReference Include="..\workflows-core\src\modules\Elsa.Agents.Core\Elsa.Agents.Core.csproj" />
+	  <ProjectReference Include="..\workflows-core\src\modules\Elsa.Agents.Persistence.EntityFrameworkCore.Sqlite\Elsa.Agents.Persistence.EntityFrameworkCore.Sqlite.csproj" />
+	  <ProjectReference Include="..\workflows-core\src\modules\Elsa.Agents.Persistence.EntityFrameworkCore\Elsa.Agents.Persistence.EntityFrameworkCore.csproj" />
+	  <ProjectReference Include="..\workflows-core\src\modules\Elsa.Alterations.Core\Elsa.Alterations.Core.csproj" />
+	  <ProjectReference Include="..\workflows-core\src\modules\Elsa.Alterations.MassTransit\Elsa.Alterations.MassTransit.csproj" />
+	  <ProjectReference Include="..\workflows-core\src\modules\Elsa.Alterations\Elsa.Alterations.csproj" />
+	  <ProjectReference Include="..\workflows-core\src\modules\Elsa.AzureServiceBus\Elsa.AzureServiceBus.csproj" />
+	  <ProjectReference Include="..\workflows-core\src\modules\Elsa.Caching.Distributed.MassTransit\Elsa.Caching.Distributed.MassTransit.csproj" />
+	  <ProjectReference Include="..\workflows-core\src\modules\Elsa.Caching.Distributed.ProtoActor\Elsa.Caching.Distributed.ProtoActor.csproj" />
+	  <ProjectReference Include="..\workflows-core\src\modules\Elsa.Caching.Distributed\Elsa.Caching.Distributed.csproj" />
+	  <ProjectReference Include="..\workflows-core\src\modules\Elsa.Caching\Elsa.Caching.csproj" />
+	  <ProjectReference Include="..\workflows-core\src\modules\Elsa.Common\Elsa.Common.csproj" />
+	  <ProjectReference Include="..\workflows-core\src\modules\Elsa.CSharp\Elsa.CSharp.csproj" />
+	  <ProjectReference Include="..\workflows-core\src\modules\Elsa.Dsl\Elsa.Dsl.csproj" />
+	  <ProjectReference Include="..\workflows-core\src\modules\Elsa.Email\Elsa.Email.csproj" />
+	  <ProjectReference Include="..\workflows-core\src\modules\Elsa.EntityFrameworkCore.Common\Elsa.EntityFrameworkCore.Common.csproj" />
+	  <ProjectReference Include="..\workflows-core\src\modules\Elsa.EntityFrameworkCore.Oracle\Elsa.EntityFrameworkCore.Oracle.csproj" />
+	  <ProjectReference Include="..\workflows-core\src\modules\Elsa.EntityFrameworkCore.Sqlite\Elsa.EntityFrameworkCore.Sqlite.csproj" />
+	  <ProjectReference Include="..\workflows-core\src\modules\Elsa.EntityFrameworkCore\Elsa.EntityFrameworkCore.csproj" />
+	  <ProjectReference Include="..\workflows-core\src\modules\Elsa.Environments\Elsa.Environments.csproj" />
+	  <ProjectReference Include="..\workflows-core\src\modules\Elsa.Expressions\Elsa.Expressions.csproj" />
+	  <ProjectReference Include="..\workflows-core\src\modules\Elsa.FileStorage\Elsa.FileStorage.csproj" />
+	  <ProjectReference Include="..\workflows-core\src\modules\Elsa.Hangfire\Elsa.Hangfire.csproj" />
+	  <ProjectReference Include="..\workflows-core\src\modules\Elsa.Hosting.Management\Elsa.Hosting.Management.csproj" />
+	  <ProjectReference Include="..\workflows-core\src\modules\Elsa.Http\Elsa.Http.csproj" />
+	  <ProjectReference Include="..\workflows-core\src\modules\Elsa.Identity\Elsa.Identity.csproj" />
+	  <ProjectReference Include="..\workflows-core\src\modules\Elsa.JavaScript\Elsa.JavaScript.csproj" />
+	  <ProjectReference Include="..\workflows-core\src\modules\Elsa.KeyValues\Elsa.KeyValues.csproj" />
+	  <ProjectReference Include="..\workflows-core\src\modules\Elsa.Labels\Elsa.Labels.csproj" />
+	  <ProjectReference Include="..\workflows-core\src\modules\Elsa.Liquid\Elsa.Liquid.csproj" />
+	  <ProjectReference Include="..\workflows-core\src\modules\Elsa.MassTransit.AzureServiceBus\Elsa.MassTransit.AzureServiceBus.csproj" />
+	  <ProjectReference Include="..\workflows-core\src\modules\Elsa.MassTransit.RabbitMq\Elsa.MassTransit.RabbitMq.csproj" />
+	  <ProjectReference Include="..\workflows-core\src\modules\Elsa.MassTransit\Elsa.MassTransit.csproj" />
+	  <ProjectReference Include="..\workflows-core\src\modules\Elsa.OpenTelemetry\Elsa.OpenTelemetry.csproj" />
+	  <ProjectReference Include="..\workflows-core\src\modules\Elsa.ProtoActor.Core\Elsa.ProtoActor.Core.csproj" />
+	  <ProjectReference Include="..\workflows-core\src\modules\Elsa.Python\Elsa.Python.csproj" />
+	  <ProjectReference Include="..\workflows-core\src\modules\Elsa.Quartz.EntityFrameworkCore.Sqlite\Elsa.Quartz.EntityFrameworkCore.Sqlite.csproj" />
+	  <ProjectReference Include="..\workflows-core\src\modules\Elsa.Quartz\Elsa.Quartz.csproj" />
+	  <ProjectReference Include="..\workflows-core\src\modules\Elsa.SasTokens\Elsa.SasTokens.csproj" />
+	  <ProjectReference Include="..\workflows-core\src\modules\Elsa.Scheduling\Elsa.Scheduling.csproj" />
+	  <ProjectReference Include="..\workflows-core\src\modules\Elsa.Secrets.Api\Elsa.Secrets.Api.csproj" />
+	  <ProjectReference Include="..\workflows-core\src\modules\Elsa.Secrets.Core\Elsa.Secrets.Core.csproj" />
+	  <ProjectReference Include="..\workflows-core\src\modules\Elsa.Secrets.Management\Elsa.Secrets.Management.csproj" />
+	  <ProjectReference Include="..\workflows-core\src\modules\Elsa.Secrets.Models\Elsa.Secrets.Models.csproj" />
+	  <ProjectReference Include="..\workflows-core\src\modules\Elsa.Secrets.Persistence.EntityFrameworkCore.Sqlite\Elsa.Secrets.Persistence.EntityFrameworkCore.Sqlite.csproj" />
+	  <ProjectReference Include="..\workflows-core\src\modules\Elsa.Secrets.Scripting\Elsa.Secrets.Scripting.csproj" />
+	  <ProjectReference Include="..\workflows-core\src\modules\Elsa.Tenants\Elsa.Tenants.csproj" />
+	  <ProjectReference Include="..\workflows-core\src\modules\Elsa.Webhooks\Elsa.Webhooks.csproj" />
+	  <ProjectReference Include="..\workflows-core\src\modules\Elsa.WorkflowContexts\Elsa.WorkflowContexts.csproj" />
+	  <ProjectReference Include="..\workflows-core\src\modules\Elsa.WorkflowProviders.BlobStorage\Elsa.WorkflowProviders.BlobStorage.csproj" />
+	  <ProjectReference Include="..\workflows-core\src\modules\Elsa.Workflows.Api\Elsa.Workflows.Api.csproj" />
+	  <ProjectReference Include="..\workflows-core\src\modules\Elsa.Workflows.Core\Elsa.Workflows.Core.csproj" />
+	  <ProjectReference Include="..\workflows-core\src\modules\Elsa.Workflows.Management\Elsa.Workflows.Management.csproj" />
+	  <ProjectReference Include="..\workflows-core\src\modules\Elsa.Workflows.Runtime.Distributed\Elsa.Workflows.Runtime.Distributed.csproj" />
+	  <ProjectReference Include="..\workflows-core\src\modules\Elsa.Workflows.Runtime.ProtoActor\Elsa.Workflows.Runtime.ProtoActor.csproj" />
+	  <ProjectReference Include="..\workflows-core\src\modules\Elsa.Workflows.Runtime\Elsa.Workflows.Runtime.csproj" />
+	  <ProjectReference Include="..\workflows-core\src\modules\Elsa\Elsa.csproj" />
+	  <ProjectReference Include="..\workflows-studio\src\bundles\Elsa.Studio\Elsa.Studio.csproj" />
+	  <ProjectReference Include="..\workflows-studio\src\framework\Elsa.Studio.Core\Elsa.Studio.Core.csproj" />
+	</ItemGroup>
+
+</Project>

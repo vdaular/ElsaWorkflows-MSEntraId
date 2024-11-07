@@ -1,0 +1,18 @@
+﻿@page "/logout"
+@inject NavigationManager Navigation
+@inject Microsoft.AspNetCore.Components.Authorization.AuthenticationStateProvider AuthenticationStateProvider
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+
+<h3>Logout</h3>
+<button @onclick="LogoutTask">Logout</button>
+
+@code {
+    private async Task LogoutTask()
+    {
+        // Redirige al usuario a la página de logout
+        // Esto cierra la sesión en Azure AD y redirige a la página de inicio
+        var logoutUrl = $"{HttpContextAccessor.HttpContext.Request.Scheme}://{HttpContextAccessor.HttpContext.Request.Host}/signin-oidc/logout";
+
+        Navigation.NavigateTo(logoutUrl);
+    }
+}

@@ -1,0 +1,19 @@
+{
+  "Backend": {
+    "Url": "https://localhost:5001/elsa/api"
+  },
+  "Shell": {
+    "DisableAuthorization": false
+  },
+  "AzureAd": {
+    "Instance": "https://login.microsoftonline.com/",
+    "TenantId": "",
+    "ClientId": "",
+    "ClientSecret": "",
+    "CallbackPath": "/signin-oidc"
+  },
+  "ElsaBackend": {
+    "Scopes": [ "api://" ],
+    "BaseUrl": "api://"
+  }
+}

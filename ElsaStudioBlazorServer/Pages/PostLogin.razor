@@ -1,0 +1,37 @@
+﻿@page "/post-login"
+@using Microsoft.AspNetCore.Components.Authorization
+@inject NavigationManager NavigationManager
+@inject AuthenticationStateProvider AuthenticationStateProvider;
+<h3>PostLogin</h3>
+
+@code {
+
+    private string userName = "Usuario no autenticado";
+
+    /// <inheritdoc />
+    protected override async Task OnInitializedAsync()
+    {
+        ((AdAuthenticationStateProvider)AuthenticationStateProvider).NotifyAuthenticationStateChanged();
+        NavigationManager.NavigateTo("", true);
+
+        userName = await GetAuthenticatedUserNameAsync();
+        Console.WriteLine($"Usuario autenticado: {userName}");
+
+        await base.OnInitializedAsync();
+    }
+
+    private async Task<string> GetAuthenticatedUserNameAsync()
+    {
+        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        var user = authState.User;
+
+        if (user.Identity.IsAuthenticated)
+        {
+            return user.Identity.Name;
+        }
+        else
+        {
+            return "Usuario no autenticado";
+        }
+    }
+}
