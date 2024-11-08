@@ -1,4 +1,3 @@
-using Elsa.Agents;
 using Elsa.Alterations.Extensions;
 using Elsa.Alterations.MassTransit.Extensions;
 using Elsa.Caching.Options;
@@ -22,9 +21,6 @@ using Elsa.Workflows.Management.Stores;
 using Elsa.Workflows.Runtime.Distributed.Extensions;
 using Elsa.Workflows.Runtime.Stores;
 using Elsa.Workflows.Runtime.Tasks;
-using ElsaServer.Enums;
-using ElsaServer.Filters;
-using ElsaServer;
 using Medallion.Threading.FileSystem;
 using Medallion.Threading.Oracle;
 using Medallion.Threading.Redis;
@@ -37,11 +33,15 @@ using Proto.Persistence.Sqlite;
 using StackExchange.Redis;
 using System.Text.Encodings.Web;
 using Elsa.EntityFrameworkCore;
-using WebhooksCore.Options;
 using WebhooksCore;
+using WebhooksCore.Options;
+using ElsaServer.Enums;
+using ElsaServer.Filters;
+using ElsaServer;
+using Elsa.Agents;
 
 #region Declaración de constantes
-const SqlDatabaseProvider sqlDatabaseProvider = SqlDatabaseProvider.Oracle;
+const SqlDatabaseProvider sqlDatabaseProvider = SqlDatabaseProvider.Sqlite;
 const bool useHangfire = false;
 const bool useQuartz = true;
 const bool useMassTransit = true;
@@ -65,15 +65,18 @@ var services = builder.Services;
 var configuration = builder.Configuration;
 var oracleConnectionString = configuration.GetConnectionString("Oracle")!;
 var sqliteConnectionString = configuration.GetConnectionString("Sqlite")!;
+var sqlServerConnectionString = configuration.GetConnectionString("SqlServer")!;
 var azureServiceBusConnectionString = configuration.GetConnectionString("AzureServiceBus")!;
 var rabbitMqConnectionString = configuration.GetConnectionString("RabbitMq")!;
 var redisConnectionString = configuration.GetConnectionString("Redis")!;
 var distributedLockProviderName = configuration.GetSection("Runtime:DistributedLocking")["Provider"];
 var appRole = Enum.Parse<ApplicationRole>(configuration["AppRole"] ?? "Default");
 
-var elsaOracleDBContextOptions = new ElsaDbContextOptions()
+var elsaDBContextOptions = new ElsaDbContextOptions()
 {
-    SchemaName = "ADMIN",
+    SchemaName = "SEGURIDAD_INFORMATICA",
+    MigrationsAssemblyName = "Orchestrator.Backend",
+    MigrationsHistoryTableName = "Orchestrator.Backend.MigrationsHistory"
 };
 
 services.AddElsa(elsa =>
@@ -92,6 +95,69 @@ services.AddElsa(elsa =>
     });
     elsa.UseWorkflowManagement(management =>
     {
+        if (sqlDatabaseProvider == SqlDatabaseProvider.Oracle)
+        {
+            management.UseEntityFrameworkCore(ef =>
+            {
+                ef.UseOracle(oracleConnectionString, elsaDBContextOptions);
+                ef.RunMigrations = runEFCoreMigrations;
+            });
+
+            management.UseWorkflowDefinitions(def => def.UseEntityFrameworkCore(ef =>
+            {
+                ef.UseOracle(oracleConnectionString, elsaDBContextOptions);
+                ef.RunMigrations = runEFCoreMigrations;
+            }));
+
+            management.UseWorkflowInstances(ef => ef.UseEntityFrameworkCore(ef =>
+            {
+                ef.UseOracle(oracleConnectionString, elsaDBContextOptions);
+                ef.RunMigrations = runEFCoreMigrations;
+            }));
+        }
+
+        if (sqlDatabaseProvider == SqlDatabaseProvider.Sqlite)
+        {
+            management.UseEntityFrameworkCore(ef =>
+            {
+                ef.UseSqlite(sqliteConnectionString);
+                ef.RunMigrations = runEFCoreMigrations;
+            });
+
+            management.UseWorkflowDefinitions(def => def.UseEntityFrameworkCore(ef =>
+            {
+                ef.UseSqlite(sqliteConnectionString);
+                ef.RunMigrations = runEFCoreMigrations;
+            }));
+
+            management.UseWorkflowInstances(ef => ef.UseEntityFrameworkCore(ef =>
+            {
+                ef.UseSqlite(sqliteConnectionString);
+                ef.RunMigrations = runEFCoreMigrations;
+            }));
+        }
+
+        if (sqlDatabaseProvider == SqlDatabaseProvider.SqlServer)
+        {
+            management.UseEntityFrameworkCore(ef =>
+            {
+                ef.UseSqlServer(sqlServerConnectionString);
+                ef.RunMigrations = runEFCoreMigrations;
+            });
+
+            management.UseWorkflowDefinitions(def => def.UseEntityFrameworkCore(ef =>
+            {
+                ef.UseSqlServer(sqlServerConnectionString);
+                ef.RunMigrations = runEFCoreMigrations;
+            }));
+
+            management.UseWorkflowInstances(ef => ef.UseEntityFrameworkCore(ef =>
+            {
+                ef.UseSqlServer(sqlServerConnectionString);
+                ef.RunMigrations = runEFCoreMigrations;
+            }));
+        }
+
         if (useZipCompression)
             management.SetCompressionAlgorithm(nameof(Zstd));
 
@@ -106,32 +172,35 @@ services.AddElsa(elsa =>
 
         management.SetDefaultLogPersistenceMode(LogPersistenceMode.Inherit);
         management.UseReadOnlyMode(useReadOnlyMode);
-
-        //management.UseWorkflowDefinitions(def => def.UseEntityFrameworkCore(ef => 
-        //{
-        //    ef.UseOracle(oracleConnectionString, elsaOracleDBContextOptions);
-        //    ef.RunMigrations = runEFCoreMigrations;
-        //}));
-
-        //management.UseWorkflowInstances(ef => ef.UseEntityFrameworkCore(ef =>
-        //{
-        //    ef.UseOracle(oracleConnectionString, elsaOracleDBContextOptions);
-        //    ef.RunMigrations = runEFCoreMigrations;
-        //}));
-
-        management.UseEntityFrameworkCore(ef =>
-        {
-            ef.UseOracle(oracleConnectionString, elsaOracleDBContextOptions);
-            ef.RunMigrations = runEFCoreMigrations;
-        });
     });
     elsa.UseWorkflowRuntime(runtime =>
     {
-        runtime.UseEntityFrameworkCore(ef =>
+        if (sqlDatabaseProvider == SqlDatabaseProvider.Oracle)
         {
-            ef.UseOracle(oracleConnectionString, elsaOracleDBContextOptions);
-            ef.RunMigrations = runEFCoreMigrations;
-        });
+            runtime.UseEntityFrameworkCore(ef =>
+            {
+                ef.UseOracle(oracleConnectionString, elsaDBContextOptions);
+                ef.RunMigrations = runEFCoreMigrations;
+            });
+        }
+
+        if (sqlDatabaseProvider == SqlDatabaseProvider.Sqlite)
+        {
+            runtime.UseEntityFrameworkCore(ef =>
+            {
+                ef.UseSqlite(sqliteConnectionString);
+                ef.RunMigrations = runEFCoreMigrations;
+            });
+        }
+
+        if (sqlDatabaseProvider == SqlDatabaseProvider.SqlServer)
+        {
+            runtime.UseEntityFrameworkCore(ef =>
+            {
+                ef.UseSqlServer(sqlServerConnectionString);
+                ef.RunMigrations = runEFCoreMigrations;
+            });
+        }
 
         if (workflowRuntime == WorkflowRuntime.Distributed)
         {
@@ -197,12 +266,35 @@ services.AddElsa(elsa =>
     elsa.UseEnvironments(environments => environments.EnvironmentsOptions = options => configuration.GetSection("Environments").Bind(options));
     elsa.UseAlterations(alterations =>
     {
-        alterations.UseEntityFrameworkCore(ef =>
+        if (sqlDatabaseProvider == SqlDatabaseProvider.Oracle)
         {
-            ef.UseOracle(oracleConnectionString, elsaOracleDBContextOptions);
+            alterations.UseEntityFrameworkCore(ef =>
+            {
+                ef.UseOracle(oracleConnectionString, elsaDBContextOptions);
 
-            ef.RunMigrations = runEFCoreMigrations;
-        });
+                ef.RunMigrations = runEFCoreMigrations;
+            });
+        }
+
+        if (sqlDatabaseProvider == SqlDatabaseProvider.Sqlite)
+        {
+            alterations.UseEntityFrameworkCore(ef =>
+            {
+                ef.UseSqlite(sqliteConnectionString);
+
+                ef.RunMigrations = runEFCoreMigrations;
+            });
+        }
+
+        if (sqlDatabaseProvider == SqlDatabaseProvider.SqlServer)
+        {
+            alterations.UseEntityFrameworkCore(ef =>
+            {
+                ef.UseSqlServer(sqlServerConnectionString);
+
+                ef.RunMigrations = runEFCoreMigrations;
+            });
+        }
 
         if (useMassTransit)
         {
@@ -272,7 +364,25 @@ services.AddElsa(elsa =>
     {
         elsa
             .UseAgentActivities()
-            .UseAgentPersistence(persistence => persistence.UseEntityFrameworkCore(ef => ef.UseSqlite(sqliteConnectionString)))
+            .UseAgentPersistence(persistence => persistence.UseEntityFrameworkCore(ef =>
+            {
+                if (sqlDatabaseProvider == SqlDatabaseProvider.SqlServer)
+                {
+                    persistence.UseEntityFrameworkCore(ef =>
+                    {
+                        ef.UseSqlServer(sqlServerConnectionString);
+                        ef.RunMigrations = runEFCoreMigrations;
+                    });
+                }
+                else
+                {
+                    persistence.UseEntityFrameworkCore(ef =>
+                    {
+                        ef.UseSqlite(sqliteConnectionString);
+                        ef.RunMigrations = runEFCoreMigrations;
+                    });
+                }
+            }))
             .UseAgentsApi();
 
         services.Configure<AgentsOptions>(options => builder.Configuration.GetSection("Agents").Bind(options));
@@ -285,10 +395,23 @@ services.AddElsa(elsa =>
             .UseSecretsManagement(management =>
             {
                 management.ConfigureOptions(options => configuration.GetSection("Secrets:Management").Bind(options));
-                management.UseEntityFrameworkCore(ef =>
+
+                if (sqlDatabaseProvider == SqlDatabaseProvider.SqlServer)
                 {
-                    ef.UseSqlite(sqliteConnectionString);
-                });
+                    management.UseEntityFrameworkCore(ef =>
+                    {
+                        ef.UseSqlServer(sqlServerConnectionString);
+                        ef.RunMigrations = runEFCoreMigrations;
+                    });
+                }
+                else
+                {
+                    management.UseEntityFrameworkCore(ef =>
+                    {
+                        ef.UseSqlite(sqliteConnectionString);
+                        ef.RunMigrations = runEFCoreMigrations;
+                    });
+                }
             })
             .UseSecretsApi()
             .UseSecretsScripting()
@@ -298,16 +421,6 @@ services.AddElsa(elsa =>
     elsa.InstallDropIns(options => options.DropInRootDirectory = Path.Combine(Directory.GetCurrentDirectory(), "App_Data", "DropIns"));
     elsa.AddSwagger();
     elsa.AddFastEndpointsAssembly<Program>();
-
-    //// Default Identity features for authentication/authorization.
-    //elsa.UseIdentity(identity =>
-    //{
-    //    identity.TokenOptions = options => options.SigningKey = "sufficiently-large-secret-signing-key"; // This key needs to be at least 256 bits long.
-    //    identity.UseAdminUserProvider();
-    //});
-
-    //// Configure ASP.NET authentication/authorization.
-    //elsa.UseDefaultAuthentication(auth => auth.UseAdminApiKey());
 
     builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddMicrosoftIdentityWebApi(builder.Configuration.GetSection("AzureAd"));
 
@@ -378,7 +491,7 @@ services.AddElsa(elsa =>
     elsa.AddWorkflowsFrom<Program>();
 
     // Register custom webhook definitions from the application, if any.
-   elsa.UseWebhooks(webhooks =>
+    elsa.UseWebhooks(webhooks =>
     {
         var sinks = new[]
         {

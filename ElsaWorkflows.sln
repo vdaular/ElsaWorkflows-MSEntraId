@@ -181,6 +181,14 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Elsa.Agents.Models", "workf
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Elsa.Agents.Persistence", "workflows-core\src\modules\Elsa.Agents.Persistence\Elsa.Agents.Persistence.csproj", "{79C0562F-4AAC-4954-852B-A38D86D4E3B9}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Elsa.Quartz.EntityFrameworkCore.SqlServer", "workflows-core\src\modules\Elsa.Quartz.EntityFrameworkCore.SqlServer\Elsa.Quartz.EntityFrameworkCore.SqlServer.csproj", "{58390154-FAB1-49CE-949F-4D55D15C823C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Elsa.Agents.Persistence.EntityFrameworkCore.SqlServer", "workflows-core\src\modules\Elsa.Agents.Persistence.EntityFrameworkCore.SqlServer\Elsa.Agents.Persistence.EntityFrameworkCore.SqlServer.csproj", "{743B7048-2719-432F-822A-4056A4F9EFA5}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Elsa.EntityFrameworkCore.SqlServer", "workflows-core\src\modules\Elsa.EntityFrameworkCore.SqlServer\Elsa.EntityFrameworkCore.SqlServer.csproj", "{AFF81015-91CB-43C1-99D6-813C29511BCE}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Elsa.Secrets.Persistence.EntityFrameworkCore.SqlServer", "workflows-core\src\modules\Elsa.Secrets.Persistence.EntityFrameworkCore.SqlServer\Elsa.Secrets.Persistence.EntityFrameworkCore.SqlServer.csproj", "{FE75264F-0CE2-473A-990D-D6579234EA44}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -539,6 +547,22 @@ Global
 		{79C0562F-4AAC-4954-852B-A38D86D4E3B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{79C0562F-4AAC-4954-852B-A38D86D4E3B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{79C0562F-4AAC-4954-852B-A38D86D4E3B9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{58390154-FAB1-49CE-949F-4D55D15C823C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{58390154-FAB1-49CE-949F-4D55D15C823C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{58390154-FAB1-49CE-949F-4D55D15C823C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{58390154-FAB1-49CE-949F-4D55D15C823C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{743B7048-2719-432F-822A-4056A4F9EFA5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{743B7048-2719-432F-822A-4056A4F9EFA5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{743B7048-2719-432F-822A-4056A4F9EFA5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{743B7048-2719-432F-822A-4056A4F9EFA5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AFF81015-91CB-43C1-99D6-813C29511BCE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AFF81015-91CB-43C1-99D6-813C29511BCE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AFF81015-91CB-43C1-99D6-813C29511BCE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AFF81015-91CB-43C1-99D6-813C29511BCE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FE75264F-0CE2-473A-990D-D6579234EA44}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FE75264F-0CE2-473A-990D-D6579234EA44}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FE75264F-0CE2-473A-990D-D6579234EA44}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FE75264F-0CE2-473A-990D-D6579234EA44}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -630,6 +654,10 @@ Global
 		{F867A814-2F6C-4D96-9A5D-63C00736FE32} = {6F764537-803F-4EFA-9B06-301CA2933CB9}
 		{55DF3D2D-C812-47B4-84C9-266CC97815EF} = {6F764537-803F-4EFA-9B06-301CA2933CB9}
 		{79C0562F-4AAC-4954-852B-A38D86D4E3B9} = {6F764537-803F-4EFA-9B06-301CA2933CB9}
+		{58390154-FAB1-49CE-949F-4D55D15C823C} = {6F764537-803F-4EFA-9B06-301CA2933CB9}
+		{743B7048-2719-432F-822A-4056A4F9EFA5} = {6F764537-803F-4EFA-9B06-301CA2933CB9}
+		{AFF81015-91CB-43C1-99D6-813C29511BCE} = {6F764537-803F-4EFA-9B06-301CA2933CB9}
+		{FE75264F-0CE2-473A-990D-D6579234EA44} = {6F764537-803F-4EFA-9B06-301CA2933CB9}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {74BCDFF4-2EA2-4E10-96F3-E77E6052D29B}

@@ -7,6 +7,13 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+	  <Compile Remove="App_Data\**" />
+	  <Content Remove="App_Data\**" />
+	  <EmbeddedResource Remove="App_Data\**" />
+	  <None Remove="App_Data\**" />
+	</ItemGroup>
+
+	<ItemGroup>
 	  <None Remove="appsettings.json.example" />
 	</ItemGroup>
 
@@ -37,8 +44,11 @@
 	  <ProjectReference Include="..\workflows-core\src\modules\Elsa.Agents.Activities\Elsa.Agents.Activities.csproj" />
 	  <ProjectReference Include="..\workflows-core\src\modules\Elsa.Agents.Api\Elsa.Agents.Api.csproj" />
 	  <ProjectReference Include="..\workflows-core\src\modules\Elsa.Agents.Core\Elsa.Agents.Core.csproj" />
+	  <ProjectReference Include="..\workflows-core\src\modules\Elsa.Agents.Models\Elsa.Agents.Models.csproj" />
 	  <ProjectReference Include="..\workflows-core\src\modules\Elsa.Agents.Persistence.EntityFrameworkCore.Sqlite\Elsa.Agents.Persistence.EntityFrameworkCore.Sqlite.csproj" />
+	  <ProjectReference Include="..\workflows-core\src\modules\Elsa.Agents.Persistence.EntityFrameworkCore.SqlServer\Elsa.Agents.Persistence.EntityFrameworkCore.SqlServer.csproj" />
 	  <ProjectReference Include="..\workflows-core\src\modules\Elsa.Agents.Persistence.EntityFrameworkCore\Elsa.Agents.Persistence.EntityFrameworkCore.csproj" />
+	  <ProjectReference Include="..\workflows-core\src\modules\Elsa.Agents.Persistence\Elsa.Agents.Persistence.csproj" />
 	  <ProjectReference Include="..\workflows-core\src\modules\Elsa.Alterations.Core\Elsa.Alterations.Core.csproj" />
 	  <ProjectReference Include="..\workflows-core\src\modules\Elsa.Alterations.MassTransit\Elsa.Alterations.MassTransit.csproj" />
 	  <ProjectReference Include="..\workflows-core\src\modules\Elsa.Alterations\Elsa.Alterations.csproj" />
@@ -54,6 +64,7 @@
 	  <ProjectReference Include="..\workflows-core\src\modules\Elsa.EntityFrameworkCore.Common\Elsa.EntityFrameworkCore.Common.csproj" />
 	  <ProjectReference Include="..\workflows-core\src\modules\Elsa.EntityFrameworkCore.Oracle\Elsa.EntityFrameworkCore.Oracle.csproj" />
 	  <ProjectReference Include="..\workflows-core\src\modules\Elsa.EntityFrameworkCore.Sqlite\Elsa.EntityFrameworkCore.Sqlite.csproj" />
+	  <ProjectReference Include="..\workflows-core\src\modules\Elsa.EntityFrameworkCore.SqlServer\Elsa.EntityFrameworkCore.SqlServer.csproj" />
 	  <ProjectReference Include="..\workflows-core\src\modules\Elsa.EntityFrameworkCore\Elsa.EntityFrameworkCore.csproj" />
 	  <ProjectReference Include="..\workflows-core\src\modules\Elsa.Environments\Elsa.Environments.csproj" />
 	  <ProjectReference Include="..\workflows-core\src\modules\Elsa.Expressions\Elsa.Expressions.csproj" />
@@ -73,6 +84,7 @@
 	  <ProjectReference Include="..\workflows-core\src\modules\Elsa.ProtoActor.Core\Elsa.ProtoActor.Core.csproj" />
 	  <ProjectReference Include="..\workflows-core\src\modules\Elsa.Python\Elsa.Python.csproj" />
 	  <ProjectReference Include="..\workflows-core\src\modules\Elsa.Quartz.EntityFrameworkCore.Sqlite\Elsa.Quartz.EntityFrameworkCore.Sqlite.csproj" />
+	  <ProjectReference Include="..\workflows-core\src\modules\Elsa.Quartz.EntityFrameworkCore.SqlServer\Elsa.Quartz.EntityFrameworkCore.SqlServer.csproj" />
 	  <ProjectReference Include="..\workflows-core\src\modules\Elsa.Quartz\Elsa.Quartz.csproj" />
 	  <ProjectReference Include="..\workflows-core\src\modules\Elsa.SasTokens\Elsa.SasTokens.csproj" />
 	  <ProjectReference Include="..\workflows-core\src\modules\Elsa.Scheduling\Elsa.Scheduling.csproj" />
@@ -81,6 +93,8 @@
 	  <ProjectReference Include="..\workflows-core\src\modules\Elsa.Secrets.Management\Elsa.Secrets.Management.csproj" />
 	  <ProjectReference Include="..\workflows-core\src\modules\Elsa.Secrets.Models\Elsa.Secrets.Models.csproj" />
 	  <ProjectReference Include="..\workflows-core\src\modules\Elsa.Secrets.Persistence.EntityFrameworkCore.Sqlite\Elsa.Secrets.Persistence.EntityFrameworkCore.Sqlite.csproj" />
+	  <ProjectReference Include="..\workflows-core\src\modules\Elsa.Secrets.Persistence.EntityFrameworkCore.SqlServer\Elsa.Secrets.Persistence.EntityFrameworkCore.SqlServer.csproj" />
+	  <ProjectReference Include="..\workflows-core\src\modules\Elsa.Secrets.Persistence.EntityFrameworkCore\Elsa.Secrets.Persistence.EntityFrameworkCore.csproj" />
 	  <ProjectReference Include="..\workflows-core\src\modules\Elsa.Secrets.Scripting\Elsa.Secrets.Scripting.csproj" />
 	  <ProjectReference Include="..\workflows-core\src\modules\Elsa.Tenants\Elsa.Tenants.csproj" />
 	  <ProjectReference Include="..\workflows-core\src\modules\Elsa.Webhooks\Elsa.Webhooks.csproj" />
