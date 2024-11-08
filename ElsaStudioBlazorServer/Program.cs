@@ -16,7 +16,8 @@ using Elsa.Studio.WorkflowContexts.Extensions;
 using Elsa.Studio.Webhooks.Extensions;
 using Elsa.Studio.Localization.Time.Providers;
 using Elsa.Studio.Localization.Time;
-using Elsa.Studio.Services;
+using Elsa.Studio.Counter.Extensions;
+using Elsa.Studio.DomInterop.Extensions;
 
 // Build the host.
 var builder = WebApplication.CreateBuilder(args);
@@ -74,6 +75,8 @@ builder.Services.AddWorkflowContextsModule();
 builder.Services.AddWebhooksModule();
 builder.Services.AddAgentsModule(backendApiConfig);
 builder.Services.AddSecretsModule(backendApiConfig);
+builder.Services.AddDomInterop();
+
 
 builder.Services.AddScoped<IFeature, ElsaStudioBlazorServer.Helpers.Feature>();
 
