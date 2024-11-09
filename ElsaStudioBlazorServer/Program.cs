@@ -16,7 +16,6 @@ using Elsa.Studio.WorkflowContexts.Extensions;
 using Elsa.Studio.Webhooks.Extensions;
 using Elsa.Studio.Localization.Time.Providers;
 using Elsa.Studio.Localization.Time;
-using Elsa.Studio.Counter.Extensions;
 using Elsa.Studio.DomInterop.Extensions;
 
 // Build the host.
